@@ -21,12 +21,3 @@ ng build
 
 ng serve --proxy-config proxy.config.json --open
 
-## Advanced Topics
-
-@Input - Parent to child communication.
-@Output - Child to parent communication. EventEmitter.
-Pipes - Custom Pipe
-HTTP error handling
-Route parameters - ActivatedRoute.
-Nested routes - children, router-outlet.
-Named router outlet.
