@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Customer} from '../models/customer';
-import {Router} from '@angular/router';
+import {Router, UrlSerializer} from '@angular/router';
 import {CustomerPage} from "../models/customer-page";
 
 @Injectable({
@@ -10,11 +10,22 @@ import {CustomerPage} from "../models/customer-page";
 })
 export class RestService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,private serializer: UrlSerializer) {
   }
 
-  public getCustomers(page: number, size: number): Observable<CustomerPage> {
-    return this.http.get<CustomerPage>(`/api/customer?page=${page}&size=${size}`);
+  public getCustomers(page: number, size: number, filters: any): Observable<CustomerPage> {
+    console.log(filters);
+    let url = `/api/customer?page=${page}&size=${size}`;
+    const queryParams: { [prop: string]: any[] } = {};
+    if (filters) {
+      for (let filter of filters) {
+        let { property, value } = <{ property: string; value: string }>filter;
+        queryParams[property] = [value];
+      }
+      const queryParamsString = new HttpParams({ fromObject: queryParams }).toString();
+      url = url + "&" + queryParamsString;
+    }
+    return this.http.get<CustomerPage>(url);
   }
 
   public saveCustomer(customer: Customer): Observable<any> {

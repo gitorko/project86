@@ -45,18 +45,8 @@ export class HomeComponent implements OnInit {
 
   refresh(state: ClrDatagridStateInterface) {
     this.loading = true;
-    console.log(state);
-
     let filters: { [prop: string]: any[] } = {};
-    if (state.filters) {
-      for (let filter of state.filters) {
-        let { property, value } = <{ property: string; value: string }>filter;
-        console.log(property + " " + value);
-        filters[property] = [value];
-      }
-    }
-
-    this.restService.getCustomers(state.page.current - 1, state.page.size).subscribe(data => {
+    this.restService.getCustomers(state.page.current - 1, state.page.size, state.filters).subscribe(data => {
         this.customerPage = data;
         this.loading = false;
       },
