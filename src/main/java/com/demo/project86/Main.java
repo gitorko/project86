@@ -34,7 +34,6 @@ public class Main implements CommandLineRunner {
                     .city(city.get(randomIndex))
                     .build());
         });
-
     }
 
 }

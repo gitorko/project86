@@ -29,9 +29,15 @@
         <h2 style="text-align: center">Customers</h2>
         <clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)">
           <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
-          <clr-dg-column [clrDgField]="'firstName'">First Name</clr-dg-column>
-          <clr-dg-column [clrDgField]="'lastName'">Last Name</clr-dg-column>
-          <clr-dg-column [clrDgField]="'city'">City</clr-dg-column>
+          <clr-dg-column [clrDgField]="'firstName'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">First Name</ng-container>
+          </clr-dg-column>
+          <clr-dg-column [clrDgField]="'lastName'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">Last Name</ng-container>
+          </clr-dg-column>
+          <clr-dg-column [clrDgField]="'city'">
+            <ng-container *clrDgHideableColumn="{hidden: false}">City</ng-container>
+          </clr-dg-column>
           <clr-dg-column>Action</clr-dg-column>
           <!-- structural directive -->
           <clr-dg-row *ngFor="let customer of customerPage?.content">
