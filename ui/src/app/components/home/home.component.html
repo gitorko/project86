@@ -27,13 +27,13 @@
     <div class="clr-row">
       <div class="clr-col-12">
         <h2 style="text-align: center">Customers</h2>
-        <clr-datagrid>
+        <clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)">
           <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
           <clr-dg-column [clrDgField]="'firstName'">First Name</clr-dg-column>
           <clr-dg-column [clrDgField]="'lastName'">Last Name</clr-dg-column>
           <clr-dg-column>Action</clr-dg-column>
           <!-- structural directive -->
-          <clr-dg-row clr-dg-row *clrDgItems="let customer of customers">
+          <clr-dg-row *ngFor="let customer of customerPage?.content">
             <clr-dg-cell>{{customer.id}}</clr-dg-cell>
             <clr-dg-cell>{{customer.firstName}}</clr-dg-cell>
             <clr-dg-cell>{{customer.lastName}}</clr-dg-cell>
@@ -43,7 +43,8 @@
             </clr-dg-cell>
           </clr-dg-row>
           <clr-dg-footer>
-            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-pagination #pagination [clrDgPageSize]="10" [(clrDgPage)]="page"
+                               [clrDgTotalItems]="customerPage?.totalElements">
               <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Customers per page</clr-dg-page-size>
               {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} customers
             </clr-dg-pagination>
@@ -82,7 +83,7 @@
           </div>
         </form>
       </div>
-
     </div>
+
   </div>
 </div>
