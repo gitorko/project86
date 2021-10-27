@@ -1,5 +1,8 @@
 package com.demo.project86;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import com.demo.project86.domain.Customer;
@@ -21,9 +24,15 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        List<String> city = Arrays.asList("London", "New York", "Bangalore");
         customerRepo.deleteAll();
         IntStream.range(1, 100).forEach(i -> {
-            customerRepo.save(Customer.builder().firstName("first_" + i).lastName("last_" + i).build());
+            int randomIndex = new Random().nextInt(2 - 0 + 1) + 0;
+            customerRepo.save(Customer.builder()
+                    .firstName("first_" + i)
+                    .lastName("last_" + i)
+                    .city(city.get(randomIndex))
+                    .build());
         });
 
     }

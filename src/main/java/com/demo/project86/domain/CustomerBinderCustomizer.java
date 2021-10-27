@@ -13,7 +13,9 @@ public class CustomerBinderCustomizer implements QuerydslBinderCustomizer<QCusto
         querydslBindings.including(
                 qCustomer.id,
                 qCustomer.firstName,
-                qCustomer.lastName);
+                qCustomer.lastName,
+                qCustomer.city
+        );
 
         // Allow case-insensitive partial searches on all strings.
         querydslBindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);

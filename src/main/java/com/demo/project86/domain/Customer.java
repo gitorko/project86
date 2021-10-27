@@ -35,5 +35,6 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "last_name")
     private String lastName;
+    private String city;
 
 }
