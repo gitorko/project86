@@ -45,14 +45,16 @@ export class HomeComponent implements OnInit {
 
   refresh(state: ClrDatagridStateInterface) {
     this.loading = true;
-    if (!state.page) {
+    console.log(state);
+    if (state.page?.from == -10) {
       state.page = {
         from: 0,
-        to: 10,
-        size: 10
+        to: 9,
+        size: 10,
+        current: 1
       };
     }
-    this.restService.getCustomers(state.page.current, state.page.size).subscribe(data => {
+    this.restService.getCustomers(state.page.current - 1, state.page.size).subscribe(data => {
         this.customerPage = data;
         this.loading = false;
       },

@@ -42,6 +42,7 @@
               </cds-icon>
             </clr-dg-cell>
           </clr-dg-row>
+
           <clr-dg-footer>
             <clr-dg-pagination #pagination [clrDgPageSize]="10" [(clrDgPage)]="page"
                                [clrDgTotalItems]="customerPage?.totalElements">
@@ -49,6 +50,7 @@
               {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} customers
             </clr-dg-pagination>
           </clr-dg-footer>
+
         </clr-datagrid>
       </div>
     </div>

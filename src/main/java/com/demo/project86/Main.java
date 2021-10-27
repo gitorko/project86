@@ -22,7 +22,7 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         customerRepo.deleteAll();
-        IntStream.range(1, 300).forEach(i -> {
+        IntStream.range(1, 100).forEach(i -> {
             customerRepo.save(Customer.builder().firstName("first_" + i).lastName("last_" + i).build());
         });
 
