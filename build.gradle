@@ -21,11 +21,18 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile 'com.querydsl:querydsl-apt:4.3.1'
+    compile 'com.querydsl:querydsl-core:4.3.1'
+    compile 'com.querydsl:querydsl-jpa:4.3.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     runtimeOnly 'org.hsqldb:hsqldb'
+
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+    annotationProcessor  group: 'javax.persistence'   , name: 'javax.persistence-api'
+    annotationProcessor  group: 'javax.annotation'    , name: 'javax.annotation-api'
 }
 
 bootJar {
