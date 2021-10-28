@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   flashMsg = '';
   loading = false;
   page: number = 1;
+  total: number = 1;
 
   constructor(private restService: RestService, private router: Router) {
     ClarityIcons.addIcons(trashIcon);
@@ -52,8 +53,12 @@ export class HomeComponent implements OnInit {
         size: 10,
       };
     }
-    this.restService.getCustomers(state.page.current - 1, state.page.size, state.filters, state.sort).subscribe(data => {
+    // @ts-ignore
+    let pageStart = state.page.current - 1;
+    let pageSize = state.page.size;
+    this.restService.getCustomers(pageStart, pageSize, state.filters, state.sort).subscribe(data => {
         this.customerPage = data;
+        this.total = this.customerPage?.totalElements;
         this.loading = false;
       },
       error => {

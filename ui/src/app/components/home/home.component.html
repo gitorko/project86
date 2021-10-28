@@ -53,7 +53,7 @@
 
           <clr-dg-footer>
             <clr-dg-pagination #pagination [clrDgPageSize]="10" [(clrDgPage)]="page"
-                               [clrDgTotalItems]="customerPage?.totalElements">
+                               [clrDgTotalItems]="total">
               <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Customers per page</clr-dg-page-size>
               {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} customers
             </clr-dg-pagination>
