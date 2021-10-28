@@ -8,8 +8,6 @@ import { ClrDatagridFilterInterface } from '@clr/angular';
 export class CheckboxFilterComponent implements ClrDatagridFilterInterface<any> {
   // @ts-ignore
   @Input() public filterValues: string[];
-  // // @ts-ignore
-  // @Input() public filterDisplayValues: string[];
   // @ts-ignore
   @Input() public filterKey: string;
   @Input() public selectedValues: { [value: string]: boolean } = {};
