@@ -1,10 +1,14 @@
 package com.demo.project86.domain;
 
-import com.querydsl.core.types.dsl.StringExpression;
+import java.util.Collection;
+import java.util.Optional;
+
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.StringPath;
+import org.springframework.data.querydsl.binding.MultiValueBinding;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
-import org.springframework.data.querydsl.binding.SingleValueBinding;
 
 public class CustomerBinderCustomizer implements QuerydslBinderCustomizer<QCustomer> {
 
@@ -17,7 +21,19 @@ public class CustomerBinderCustomizer implements QuerydslBinderCustomizer<QCusto
                 qCustomer.city
         );
 
-        // Allow case-insensitive partial searches on all strings.
-        querydslBindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
+        StringPath[] multiPropertySearchPaths = new StringPath[]{qCustomer.firstName, qCustomer.lastName, qCustomer.city};
+
+        querydslBindings.bind(multiPropertySearchPaths).all(new MultiValueBinding<StringPath, String>() {
+            @Override
+            public Optional<Predicate> bind(StringPath path, Collection<? extends String> values) {
+                BooleanBuilder predicate = new BooleanBuilder();
+                // Bind paths present in array multiPropertySearchPaths with incoming values
+                for (StringPath propertyPath : multiPropertySearchPaths) {
+                    values.forEach(value -> predicate.or(propertyPath.containsIgnoreCase(value)));
+                }
+                return Optional.of(predicate);
+            }
+        });
+
     }
 }

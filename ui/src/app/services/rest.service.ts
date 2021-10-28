@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Customer} from '../models/customer';
 import {Router, UrlSerializer} from '@angular/router';
 import {CustomerPage} from "../models/customer-page";
+import {CheckboxFilterComponent} from "../components/filter/checkbox-filter.component";
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,21 @@ export class RestService {
   }
 
   public getCustomers(page: number, size: number | undefined, filters: any, sort: any): Observable<CustomerPage> {
-    console.log(filters);
     let url = `/api/customer?page=${page}&size=${size}`;
-    const queryParams: { [prop: string]: any[] } = {};
     if (filters) {
       for (let filter of filters) {
-        let {property, value} = <{ property: string; value: string }>filter;
-        queryParams[property] = [value];
+        if(filter instanceof CheckboxFilterComponent) {
+           let propName = filter.filterKey;
+           const propValues = Object.entries(filter.selectedValues);
+           for (let propVal of propValues) {
+             url = url + "&" + new HttpParams().set(propName, propVal[0]).toString();
+           }
+        } else {
+          let {property, value} = <{ property: string; value: string }>filter;
+          url = url + "&" + new HttpParams().set(property, value).toString();
+        }
       }
-      const queryParamsString = new HttpParams({fromObject: queryParams}).toString();
-      url = url + "&" + queryParamsString;
+      console.log(url);
     }
     if (sort) {
       if (sort.reverse) {

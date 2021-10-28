@@ -27,7 +27,7 @@ public class HomeController {
 
     @GetMapping(value = "/api/customer")
     public Page<Customer> getCustomers(@PageableDefault(size = 20) Pageable pageRequest,
-      @QuerydslPredicate(root = Customer.class, bindings = CustomerBinderCustomizer.class) com.querydsl.core.types.Predicate predicate) {
+                                       @QuerydslPredicate(root = Customer.class, bindings = CustomerBinderCustomizer.class) com.querydsl.core.types.Predicate predicate) {
         return customerRepo.findAll(predicate, pageRequest);
     }
 
