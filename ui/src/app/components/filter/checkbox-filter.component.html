@@ -1,0 +1,4 @@
+<clr-checkbox-wrapper *ngFor="let value of filterValues;">
+  <input type="checkbox" clrCheckbox [(ngModel)]="selectedValues[value]" (ngModelChange)="toggleCheckbox(value)" />
+  <label class="clr-control-label">{{ value }}</label>
+</clr-checkbox-wrapper>

@@ -37,6 +37,12 @@
           </clr-dg-column>
           <clr-dg-column [clrDgField]="'city'">
             <ng-container *clrDgHideableColumn="{hidden: false}">City</ng-container>
+            <clr-dg-filter [clrDgFilter]="cityFilter">
+              <app-checkbox-filter
+                #cityFilter
+                [filterValues]="cityFilterValues"
+                filterKey="city"></app-checkbox-filter>
+            </clr-dg-filter>
           </clr-dg-column>
           <clr-dg-column>Action</clr-dg-column>
           <!-- structural directive -->

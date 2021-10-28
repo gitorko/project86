@@ -19,9 +19,13 @@ export class HomeComponent implements OnInit {
   loading = false;
   page: number = 1;
   total: number = 1;
+  cityFilterValues: string[] = [];
 
   constructor(private restService: RestService, private router: Router) {
     ClarityIcons.addIcons(trashIcon);
+    this.cityFilterValues.push("Bangalore");
+    this.cityFilterValues.push("New York");
+    this.cityFilterValues.push("London");
   }
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   saveCustomer(): void {
+    console.log('save customer!');
     this.restService.saveCustomer(this.customer)
       .subscribe(data => {
         this.flashMsg = 'Saved customer: ' + this.customer.firstName;
@@ -37,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer): void {
-    console.log('delete: ' + customer.id);
+    console.log('deleting customer : ' + customer.id);
     this.restService.deleteCustomer(customer.id)
       .subscribe(data => {
         this.flashMsg = 'Deleted customer: ' + customer.id;

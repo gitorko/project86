@@ -11,12 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { RestService } from './services/rest.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChartsModule } from 'ng2-charts';
+import {CheckboxFilterComponent} from "./components/filter/checkbox-filter.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         NavbarComponent,
+        CheckboxFilterComponent,
     ],
     imports: [
         BrowserModule,
