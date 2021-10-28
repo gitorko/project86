@@ -23,14 +23,11 @@ public class CustomerBinderCustomizer implements QuerydslBinderCustomizer<QCusto
 
         StringPath[] multiPropertySearchPaths = new StringPath[]{qCustomer.firstName, qCustomer.lastName, qCustomer.city};
 
-        querydslBindings.bind(multiPropertySearchPaths).all(new MultiValueBinding<StringPath, String>() {
+        querydslBindings.bind(multiPropertySearchPaths).all(new MultiValueBinding<>() {
             @Override
             public Optional<Predicate> bind(StringPath path, Collection<? extends String> values) {
                 BooleanBuilder predicate = new BooleanBuilder();
-                // Bind paths present in array multiPropertySearchPaths with incoming values
-                for (StringPath propertyPath : multiPropertySearchPaths) {
-                    values.forEach(value -> predicate.or(propertyPath.containsIgnoreCase(value)));
-                }
+                values.forEach(value -> predicate.or(path.containsIgnoreCase(value)));
                 return Optional.of(predicate);
             }
         });
