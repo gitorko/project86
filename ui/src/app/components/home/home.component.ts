@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Customer} from '../../models/customer';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
 import {ClarityIcons, trashIcon} from '@cds/core/icon';
 import {ClrDatagridStateInterface} from '@clr/angular';
 import {CustomerPage} from "../../models/customer-page";
+import {AlertComponent} from "../alert/alert.component";
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,14 @@ export class HomeComponent implements OnInit {
 
   customerPage: CustomerPage = new CustomerPage();
   customer: Customer = new Customer();
-  flashMsg = '';
   loading = false;
   page: number = 1;
   total: number = 1;
   cityFilterValues: string[] = [];
+  tableState: ClrDatagridStateInterface = {page: {current: 1, from: 1, size: 10, to: 10}};
+
+  // @ts-ignore
+  @ViewChild(AlertComponent, {static: true}) private alert: AlertComponent;
 
   constructor(private restService: RestService, private router: Router) {
     ClarityIcons.addIcons(trashIcon);
@@ -30,14 +34,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.flashMsg = '';
   }
 
   saveCustomer(): void {
     console.log('save customer!');
     this.restService.saveCustomer(this.customer)
       .subscribe(data => {
-        this.flashMsg = 'Saved customer: ' + this.customer.firstName;
+        this.alert.showSuccess('Saved customer: ' + this.customer.firstName);
+        this.refresh(this.tableState);
       });
   }
 
@@ -45,11 +49,13 @@ export class HomeComponent implements OnInit {
     console.log('deleting customer : ' + customer.id);
     this.restService.deleteCustomer(customer.id)
       .subscribe(data => {
-        this.flashMsg = 'Deleted customer: ' + customer.id;
+        this.alert.showSuccess('Deleted customer: ' + customer.id);
+        this.refresh(this.tableState);
       });
   }
 
   refresh(state: ClrDatagridStateInterface) {
+    this.tableState = state;
     this.loading = true;
     if (!state.page) {
       state.page = {

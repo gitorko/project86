@@ -25,9 +25,6 @@ export class CheckboxFilterComponent implements ClrDatagridFilterInterface<any> 
   }
 
   public accepts(item: any): boolean {
-    if (this.filterKey === 'releaseEntity' && item[this.filterKey]) {
-      return this.selectedCount === 0 || this.selectedValues[item[this.filterKey].release];
-    }
     return this.selectedCount === 0 || this.selectedValues[item[this.filterKey]];
   }
 

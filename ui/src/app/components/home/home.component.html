@@ -1,33 +1,14 @@
 <div class="content-container">
   <div class="content-area">
-
-    <div class="clr-row" *ngIf="flashMsg">
-      <div class="clr-col-5">
-      </div>
-      <div class="clr-col-2">
-        <br>
-        <div class="alert alert-success" role="alert">
-          <div class="alert-items">
-            <div class="alert-item static">
-              <div class="alert-icon-wrapper">
-                <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
-              </div>
-              <span class="alert-text">
-                {{flashMsg}}
-              </span>
-            </div>
-          </div>
-        </div>
-        <br/>
-      </div>
-      <div class="clr-col-5">
-      </div>
+    <div class="alert-section">
+      <app-alert></app-alert>
     </div>
 
     <div class="clr-row">
       <div class="clr-col-12">
         <h2 style="text-align: center">Customers</h2>
         <clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)">
+          <clr-dg-placeholder class="content-center">No Customers!</clr-dg-placeholder>
           <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
           <clr-dg-column [clrDgField]="'firstName'">
             <ng-container *clrDgHideableColumn="{hidden: false}">First Name</ng-container>
