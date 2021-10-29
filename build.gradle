@@ -35,12 +35,6 @@ dependencies {
     annotationProcessor  group: 'javax.annotation'    , name: 'javax.annotation-api'
 }
 
-bootJar {
-    from('../project86-ui/dist/project86-ui') {
-        into 'public'
-    }
-}
-
 task buildUi(type: Exec) {
     workingDir "${projectDir}/ui"
     commandLine 'yarn','build'
