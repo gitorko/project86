@@ -26,7 +26,7 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<String> city = Arrays.asList("London", "New York", "Bangalore");
         customerRepo.deleteAll();
-        IntStream.range(1, 200).forEach(i -> {
+        IntStream.range(1, 201).forEach(i -> {
             int randomIndex = new Random().nextInt(2 - 0 + 1) + 0;
             customerRepo.save(Customer.builder()
                     .firstName("first_" + i)
