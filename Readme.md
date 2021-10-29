@@ -2,7 +2,7 @@
 
 Angular Clarity - Server Driven Data Grid with QueryDSL
 
-## Prerequisite - Start the HSQL DB server
+## HSQL DB
 
 1. Download HSQLDB bundle <http://hsqldb.org/> (<https://sourceforge.net/projects/hsqldb/files/hsqldb/hsqldb_2_6/hsqldb-2.6.0.zip/download>)
 2. Run the command below to create the db.
