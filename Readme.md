@@ -19,7 +19,7 @@ To Run UI in DEV mode
 
 ```bash
 cd project86/ui
-npm install
+yarn install
 yarn build
 yarn start
 ```
