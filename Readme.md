@@ -1,7 +1,6 @@
 # Project86
 
-
-Clarity server driven data grid
+Angular Clarity - Server Driven Data Grid with QueryDSL
 
 ## Prerequisite - Start the HSQL DB server
 
@@ -14,19 +13,29 @@ Clarity server driven data grid
    user: SA
    pwd:
 
+### Dev
 
+To Run UI in DEV mode
+
+```bash
+cd project86/ui
 npm install
+yarn build
+yarn start
+```
 
-ng build
+To Run backend in DEV mode
 
-ng serve --proxy-config proxy.config.json --open
+```bash
+cd project86
+./gradlew bootRun
+```
 
-Angular version 11.0.0.
+### Prod
+To run as a single jar, both UI and backend are bundled to single uber jar.
 
-`ng serve --proxy-config proxy.config.json --open` for a dev server. Navigate to `http://localhost:4200/`
-
-`ng build`
-
-ng generate component home --spec=false --is
-
-ng add @clr/angular
+```bash
+./gradlew cleanBuild
+cd project86/build/libs
+java -jar project86-1.0.0.jar
+```

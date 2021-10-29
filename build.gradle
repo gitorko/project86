@@ -40,3 +40,25 @@ bootJar {
         into 'public'
     }
 }
+
+task buildUi(type: Exec) {
+    workingDir "${projectDir}/ui"
+    commandLine 'yarn','build'
+    doLast {
+        println "UI build completed!"
+    }
+}
+
+task cleanBuild(type: GradleBuild) {
+    tasks = ['clean', 'buildUi', 'build']
+}
+
+bootJar {
+    from('./ui/dist/project86-ui') {
+        into 'public'
+    }
+}
+
+bootRun {
+    systemProperties = System.properties
+}
