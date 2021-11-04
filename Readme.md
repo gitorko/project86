@@ -2,16 +2,18 @@
 
 Angular Clarity - Server Driven Data Grid with QueryDSL
 
-## HSQL DB
+## Setup
 
-1. Download HSQLDB bundle <http://hsqldb.org/> (<https://sourceforge.net/projects/hsqldb/files/hsqldb/hsqldb_2_6/hsqldb-2.6.0.zip/download>)
-2. Run the command below to create the db.
-   java -cp lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:data/mydb --dbname.0 mydb
-3. To connect to the DB via UI
-   java -cp lib/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
-   jdbc:hsqldb:hsql://localhost:9001/mydb
-   user: SA
-   pwd:
+### Postgres DB
+
+```
+docker run -p 5432:5432 --name pg-container -e POSTGRES_PASSWORD=password -d postgres:9.6.10
+docker ps
+docker run -it --rm --link pg-container:postgres postgres psql -h postgres -U postgres
+CREATE USER test WITH PASSWORD 'test@123';
+CREATE DATABASE "test-db" WITH OWNER "test" ENCODING UTF8 TEMPLATE template0;
+grant all PRIVILEGES ON DATABASE "test-db" to test;
+```
 
 ### Dev
 
