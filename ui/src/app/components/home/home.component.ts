@@ -6,6 +6,8 @@ import {ClarityIcons, trashIcon} from '@cds/core/icon';
 import {ClrDatagridStateInterface} from '@clr/angular';
 import {CustomerPage} from "../../models/customer-page";
 import {AlertComponent} from "../alert/alert.component";
+import {Subject} from "rxjs";
+import {debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   total: number = 1;
   cityFilterValues: string[] = [];
   tableState: ClrDatagridStateInterface = {page: {current: 1, from: 1, size: 10, to: 10}};
+  debouncer: Subject<any> = new Subject<any>();
 
   // @ts-ignore
   @ViewChild(AlertComponent, {static: true}) private alert: AlertComponent;
@@ -34,6 +37,31 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.debouncer
+      .pipe(debounceTime(800))
+      .subscribe(state => {
+        this.tableState = state;
+        this.loading = true;
+        if (!state.page) {
+          state.page = {
+            from: 1,
+            to: 10,
+            size: 10,
+          };
+        }
+        // @ts-ignore
+        let pageStart = state.page.current - 1;
+        let pageSize = state.page.size;
+        this.restService.getCustomers(pageStart, pageSize, state.filters, state.sort).subscribe(data => {
+            this.customerPage = data;
+            this.total = this.customerPage?.totalElements;
+            this.loading = false;
+          },
+          error => {
+            this.loading = false;
+          });
+        }
+      );
   }
 
   saveCustomer(): void {
@@ -55,25 +83,7 @@ export class HomeComponent implements OnInit {
   }
 
   refresh(state: ClrDatagridStateInterface) {
-    this.tableState = state;
-    this.loading = true;
-    if (!state.page) {
-      state.page = {
-        from: 1,
-        to: 10,
-        size: 10,
-      };
-    }
-    // @ts-ignore
-    let pageStart = state.page.current - 1;
-    let pageSize = state.page.size;
-    this.restService.getCustomers(pageStart, pageSize, state.filters, state.sort).subscribe(data => {
-        this.customerPage = data;
-        this.total = this.customerPage?.totalElements;
-        this.loading = false;
-      },
-      error => {
-        this.loading = false;
-      });
+    this.debouncer.next(state);
   }
+
 }
