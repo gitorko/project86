@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.debouncer
-      .pipe(debounceTime(800))
+      .pipe(debounceTime(700))
       .subscribe(state => {
         this.tableState = state;
         this.loading = true;
