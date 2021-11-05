@@ -2286,9 +2286,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001032, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001274:
-  version "1.0.30001276"
-  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30001276.tgz#7049685eb972eb09c0ecbb57227b489d76244fb1"
-  integrity sha1-cEloXrly6wnA7LtXIntInXYkT7E=
+  version "1.0.30001278"
+  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30001278.tgz#51cafc858df77d966b17f59b5839250b24417fff"
+  integrity sha1-Ucr8hY33fZZrF/WbWDklCyRBf/8=
 
 canonical-path@1.0.0:
   version "1.0.0"
@@ -3346,9 +3346,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.886:
-  version "1.3.888"
-  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.3.888.tgz#243204af9b4c928ac45e47dbbe7bc44c30e65bf0"
-  integrity sha1-JDIEr5tMkorEXkfbvnvETDDmW/A=
+  version "1.3.889"
+  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.3.889.tgz#0b7c6f7628559592d5406deda281788f37107790"
+  integrity sha1-C3xvdihVlZLVQG3tooF4jzcQd5A=
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -5434,9 +5434,9 @@ loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
     json5 "^1.0.1"
 
 loader-utils@^2.0.0:
-  version "2.0.1"
-  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/loader-utils/-/loader-utils-2.0.1.tgz#3b8d4386f42378d6434d32d7bc08e7a52d39575e"
-  integrity sha1-O41DhvQjeNZDTTLXvAjnpS05V14=
+  version "2.0.2"
+  resolved "http://build-artifactory.eng.vmware.com/artifactory/api/npm/npm/loader-utils/-/loader-utils-2.0.2.tgz#d6e3b4fb81870721ae4e0868ab11dd638368c129"
+  integrity sha1-1uO0+4GHByGuTghoqxHdY4NowSk=
   dependencies:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
