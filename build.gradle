@@ -1,12 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.0'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
     id 'java'
 }
 
-group = 'com.demo.project86'
+group = 'com.demo'
 version = '1.0.0'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -19,25 +19,23 @@ repositories {
 }
 
 dependencies {
-    runtime 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compile 'com.querydsl:querydsl-apt:4.3.1'
-    compile 'com.querydsl:querydsl-core:4.3.1'
-    compile 'com.querydsl:querydsl-jpa:4.3.1'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.querydsl:querydsl-apt:5.0.0'
+    implementation 'com.querydsl:querydsl-core:5.0.0'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0'
     implementation 'javax.validation:validation-api:2.0.1.Final'
-
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
-    annotationProcessor  group: 'javax.persistence'   , name: 'javax.persistence-api'
-    annotationProcessor  group: 'javax.annotation'    , name: 'javax.annotation-api'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+    annotationProcessor 'javax.persistence:javax.persistence-api'
+    annotationProcessor 'javax.annotation:javax.annotation-api'
 }
 
 task buildUi(type: Exec) {
     workingDir "${projectDir}/ui"
-    commandLine 'yarn','build'
+    commandLine 'yarn', 'build'
     doLast {
         println "UI build completed!"
     }
