@@ -60,14 +60,6 @@ java -jar project86-1.0.0.jar
 
 Open [http://localhost:8080/](http://localhost:8080/)
 
-```bash
-docker build -f docker/Dockerfile --force-rm -t project86:1.0.0 .
-docker images
-docker tag project86:1.0.0 gitorko/project86:1.0.0
-docker push gitorko/project86:1.0.0
-docker-compose -f docker/docker-compose.yml up 
-```
-
 ### Docker
 
 ```bash
